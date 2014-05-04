@@ -20,17 +20,18 @@ def on_off_callback(kanal):
 #GPIO.add_event_detect(16,GPIO.FALLING,callback=on_off_callback, bouncetime=200)
 
 # Warten auf Ecke
-try:
-	print("Warten auf Ecke")
-	GPIO.wait_for_edge(16,GPIO.FALLING)
-	print("Ecke bemerkt")
-	if (edgecount<3):
-		print ("Ecken: ",edgecount)
-		edgecount=edgecount+1
-	else:
-		print("3 Ecken bemerkt")
-		subprocess.call(['pkill','raspivid'])
-		subprocess.call(['sudo','halt'])
-except KeyboardInterrupt:
-	print("Keyboard Input")
+while (edgecount<4):
+	try:
+		print("Warten auf Ecke")
+		GPIO.wait_for_edge(16,GPIO.FALLING)
+		print("Ecke bemerkt")
+		if (edgecount<3):
+			print ("Ecken: ",edgecount)
+			edgecount=edgecount+1
+		else:
+			print("3 Ecken bemerkt")
+			subprocess.call(['pkill','raspivid'])
+			subprocess.call(['sudo','halt'])
+	except KeyboardInterrupt:
+		print("Keyboard Input")
 
