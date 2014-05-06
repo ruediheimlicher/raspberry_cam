@@ -19,17 +19,26 @@ def on_off_callback(kanal):
 # event-detect config
 #GPIO.add_event_detect(16,GPIO.FALLING,callback=on_off_callback, bouncetime=200)
 
+lastklickzeit=TIME.time()*1000
+print("lastklickzeit: ",lastklickzeit)
+
 # Warten auf Ecke
 while (edgecount<4):
 	try:
 		print("Warten auf Falling")
 		GPIO.wait_for_edge(16,GPIO.FALLING)
 		print("Falling bemerkt")
+		klickzeit=TIME.time()*1000
+		if ((klickzeit-lastklickzeit)>5000):
+			edgecount=0
+			lastklickzeit=klickzeit
 		if (edgecount<2):
 			print ("Anzahl: ",edgecount)
 			edgecount=edgecount+1
 		else:
 			print("3 Fallings bemerkt")
+			GPIO.setup(12,GPIO.OUT)
+			GPIO.output(12,1)
 			subprocess.call(['pkill','raspivid'])
 			subprocess.call(['sudo','halt'])
 	except KeyboardInterrupt:
