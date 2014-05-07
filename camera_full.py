@@ -9,6 +9,7 @@ print ("camera_full")
 GPIO.setup(8,GPIO.OUT)
 GPIO.output(8,0)
 
+#sleep(10)
 #subprocess.call(['raspivid','--fullscreen','-t','0','-fps','30'])
 #subprocess.call(['raspivid','--fullscreen','-t','0','-fps','30'])
 subprocess.call(['raspivid','--preview','-80,0,800,480','-t','0','-fps','30','-roi','0,0.125,0.99,0.85'])
