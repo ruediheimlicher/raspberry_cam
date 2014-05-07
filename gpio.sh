@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Wird in rc.local beim Start aufgerufen.
 # GPIO23 setzen(ist PORT 16)
 echo "23" > /sys/class/gpio/export
 chmod 777 -R /sys/class/gpio/gpio23
