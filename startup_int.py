@@ -10,7 +10,10 @@ GPIO.setup(24,GPIO.IN,pull_up_down=GPIO.PUD_UP)
 
 # zaehler fuer falling edge
 edgecount=0
+last_counttime=TIME.time()
+global last_clicktime
 last_clicktime=TIME.time()
+print("last: ",int(last_clicktime))
 
 def on_off_callback(channels):
 	print("Falling Edge")
@@ -18,9 +21,11 @@ def on_off_callback(channels):
 	global edgecount
 	global last_clicktime
 	clicktime=TIME.time()
+	print("clicktime: ",int(clicktime), " last: ",int(last_clicktime), "diff: ",int(clicktime-last_clicktime))
 	#subprocess.call(['sudo','reboot'])
 	if ((clicktime-last_clicktime)>5):	# timeout, edgecount reset
-		edgcount=0
+		print("edgecount reset",edgecount, "last: ",int(last_clicktime))
+		edgecount=0
 		last_clicktime=clicktime
 	
 	if (edgecount<2):
@@ -36,14 +41,7 @@ def on_off_callback(channels):
 		GPIO.cleanup()
 
 
-#	subprocess.call(['pkill','raspivid'])
-	#Test:Blinky einschalten, Port 12 LO
-#	GPIO.setup(25,GPIO.OUT)
-#	GPIO.output(25,1)
 
-# Port GPIO24 (Port 18) als Input
-
-# event-detect config
 print("add event detect")
 GPIO.add_event_detect(24,GPIO.FALLING, callback=on_off_callback, bouncetime=200)
 #GPIO.add_event_callback(24,on_off_callback)
@@ -52,9 +50,9 @@ GPIO.add_event_detect(24,GPIO.FALLING, callback=on_off_callback, bouncetime=200)
 #while (True):
 while (True):	
 	akttime=TIME.time()
-	if (akttime-last_clicktime>2):
-		print("**",int(akttime))
-		last_clicktime=akttime	
+	if (akttime-last_counttime>2):
+		print("**",int(akttime), " last: ",int(last_counttime))
+		last_counttime=akttime	
 		#pass
 print("cleanup")
 #GPIO.cleanup()
