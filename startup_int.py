@@ -5,8 +5,11 @@ import subprocess
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-GPIO.setup(24,GPIO.IN,pull_up_down=GPIO.PUD_UP)
-#GPIO.remove_event_detect(25)
+
+#GPIO.setup(24,GPIO.IN,pull_up_down=GPIO.PUD_UP)
+
+# neu GPIO23 (Port16) als Eingang fuer IN/OUT-Taste
+GPIO.setup(23,GPIO.IN,pull_up_down=GPIO.PUD_UP)
 
 # zaehler fuer falling edge
 edgecount=0
@@ -43,7 +46,11 @@ def on_off_callback(channels):
 
 
 print("add event detect")
-GPIO.add_event_detect(24,GPIO.FALLING, callback=on_off_callback, bouncetime=200)
+#
+#GPIO.add_event_detect(24,GPIO.FALLING, callback=on_off_callback, bouncetime=200)
+
+# neu GPIO23 als Eingang fuer ON/OFF
+GPIO.add_event_detect(23,GPIO.FALLING, callback=on_off_callback, bouncetime=200)
 #GPIO.add_event_callback(24,on_off_callback)
 
 #lasttime=TIME.time()
