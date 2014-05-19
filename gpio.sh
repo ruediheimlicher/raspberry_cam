@@ -14,5 +14,3 @@ echo "1" > /sys/class/gpio/gpio18/value
 
 sudo python3 ./home/pi/Desktop/Camera/startup_int.py &
 sudo python3 ./home/pi/Desktop/Camera/camera_full.py
-#sudo python3 ./home/pi/Desktop/Camera/startup.py
-#sudo python3 ./home/pi/Desktop/Camera/camera_full.py
