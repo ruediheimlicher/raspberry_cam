@@ -25,7 +25,7 @@ def on_off_callback(channels):
 	global last_clicktime
 	clicktime=TIME.time()
 	print("clicktime: ",int(clicktime), " last: ",int(last_clicktime), "diff: ",int(clicktime-last_clicktime))
-	#subprocess.call(['sudo','reboot'])
+	#subprocess.call(['sudo','halt'])
 	if ((clicktime-last_clicktime)>5):	# timeout, edgecount reset
 		print("edgecount reset",edgecount, "last: ",int(last_clicktime))
 		edgecount=0
@@ -39,9 +39,12 @@ def on_off_callback(channels):
 		GPIO.setup(18,GPIO.OUT) # Port 12
 		GPIO.output(18,1)
 		
-		subprocess.call(['pkill','raspivid'])	
-		subprocess.call(['sudo','reboot'])
+#		subprocess.call(['pkill','raspivid'])	
+#		GPIO.setup(23,GPIO.OUT,pull_up_down=GPIO.PUD_DOWN)
+#		GPIO.output(23,0)
 		GPIO.cleanup()
+		
+		subprocess.call(['sudo','shutdown','-h','0'])
 
 
 
