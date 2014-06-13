@@ -40,12 +40,17 @@ def on_off_callback(channels):
 	if (edgecount<2): # edgecount incrementieren
 		print("Anzahl: ",edgecount)
 		edgecount=edgecount+1
-	else: # ernst gemein, 3 Clicks, ausschalten einleiten
+	else: # ernst gemeint, 3 Clicks, ausschalten einleiten
 		print("Dritter Click")
 
 		# Anzeige Camera reset
 		GPIO.setup(15, GPIO.OUT) # Port 10
 		GPIO.output(15,0)
+		
+		# Anzeige Camera an Monitor OFF
+		GPIO.setup(25,GPIO.OUT)
+		GPIO.output(25,0)
+
 		# Camera off
 		subprocess.call(['pkill','raspivid'])	
 
