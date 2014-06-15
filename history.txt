@@ -1,0 +1,6 @@
+140614 Bonjour neu
+Eingesetzt nach Anleitung auf 
+http://gettingstartedwithraspberrypi.tumblr.com/post/24400361937/finding-your-vnc-server-using-bonjour
+
+Install mit 
+sudo wget https://raw.github.com/Hexxeh/rpi-update/master/rpi-update -O /usr/bin/rpi-update && sudo chmod +x /usr/bin/rpi-update
