@@ -4,3 +4,8 @@ http://gettingstartedwithraspberrypi.tumblr.com/post/24400361937/finding-your-vn
 
 Install mit 
 sudo wget https://raw.github.com/Hexxeh/rpi-update/master/rpi-update -O /usr/bin/rpi-update && sudo chmod +x /usr/bin/rpi-update
+
+VNC-Kennwort raspberry in 
+/root/.vnc/passwd
+gesichert.
+Anltg: http://dennistt.net/2013/09/15/raspberry-pi/
